@@ -1,5 +1,3 @@
-// OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=57fa5073
-
 const fetchData = async (searchTerm) => {
     const response = await axios.get('http://www.omdbapi.com/', {
         params: {
@@ -8,14 +6,27 @@ const fetchData = async (searchTerm) => {
         }
     });
 
+    if (response.data.Error) {
+        return [];
+    }
+
     return response.data.Search;
 };
 
 const input = document.querySelector('input');
 
 // // debouncing an input: waiting for some time to pass after the last event to actually do something
-const onInput = debounce((event) => {
-    fetchData(event.target.value);
+const onInput = debounce(async (event) => {
+    const movies = await fetchData(event.target.value);
+    // console.log(movies);
+    for (let movie of movies) {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <img src="${movie.Poster}" alt="${movie.Title}" />
+            <h1>${movie.Title}</h1>
+        `;
+        document.querySelector('#target').append(div);
+    }
 });
 
 input.addEventListener('input', onInput);
@@ -33,8 +44,17 @@ input.addEventListener('input', onInput);
 //         clearTimeout(timeoutId);
 //     }
 
-//     timeoutId = setTimeout(() => {
-//         fetchData(event.target.value);
+//     timeoutId = setTimeout(async () => {
+//         const movies = await fetchData(event.target.value);
+//         // console.log(movies);
+//         for (let movie of movies) {
+//             const div = document.createElement('div');
+//             div.innerHTML = `
+//                 <img src="${movie.Poster}" alt="${movie.Title}" />
+//                 <h1>${movie.Title}</h1>
+//             `;
+//             document.querySelector('#target').append(div);
+//         }
 //     }, 1000);
 // };
 

@@ -31,7 +31,18 @@
     </section>
 
     <div class="container">
-        <input type="text" placeholder="enter movie title">
+        <div class="dropdown is-active">
+            <input type="text" placeholder="enter movie title">
+            <div class="dropdown-menu">
+                <div class="dropdown-content">
+                    <a class="dropdown-item" href="#">Movie #1</a>
+                    <a class="dropdown-item" href="#">Movie #2</a>
+                    <a class="dropdown-item" href="#">Movie #3</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="target"></div>
     </div>
 
     <!-- external scripts -->
