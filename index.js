@@ -7,30 +7,25 @@ const fetchData = async (searchTerm) => {
             s: searchTerm
         }
     });
-    console.log(response.data);
+
+    return response.data.Search;
 };
 
 const input = document.querySelector('input');
 
-// debouncing an input: waiting for some time to pass after the last event to actually do something
-const debounce = (func, delay = 1000) => {
-    let timeoutId;
-    return (...args) => {
-        if (timeoutId) {
-            clearTimeout(timeoutId);
-        }
-        timeoutId = setTimeout(() => {
-            func.apply(null, args);
-        }, delay);
-    };
-};
-
-const onInput = debounce(event => {
+// // debouncing an input: waiting for some time to pass after the last event to actually do something
+const onInput = debounce((event) => {
     fetchData(event.target.value);
 });
 
 input.addEventListener('input', onInput);
 
+
+// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+
+
+// // without debounce:
 // let timeoutId;
 // const onInput = (event) => {
 //     // make searches after 1 second of no typing
