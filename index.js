@@ -48,6 +48,10 @@ const onInput = debounce(async (event) => {
             <img src="${imgSrc}" />
             ${movie.Title}
         `;
+        option.addEventListener('click', () => {
+            dropdown.classList.remove('is-active');
+            input.value = movie.Title;
+        });
         resultsWrapper.append(option);
     }
 });
@@ -91,6 +95,10 @@ document.addEventListener('click', (event) => {
 //                 <img src="${imgSrc}" />
 //                 ${movie.Title}
 //             `;
+//             option.addEventListener('click', () => {
+//                 dropdown.classList.remove('is-active');
+//                 input.value = movie.Title;
+//             });
 //             resultsWrapper.append(option);
 //         }
 //     }, 1000);
