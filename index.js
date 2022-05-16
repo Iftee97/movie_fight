@@ -32,6 +32,11 @@ const resultsWrapper = document.querySelector('.results');
 const onInput = debounce(async (event) => {
     const movies = await fetchData(event.target.value);
     // console.log(movies);
+
+    if (!movies.length) {
+        dropdown.classList.remove('is-active');
+    }
+
     resultsWrapper.innerHTML = '';
     dropdown.classList.add('is-active');
 
@@ -48,7 +53,12 @@ const onInput = debounce(async (event) => {
 });
 
 input.addEventListener('input', onInput);
-
+document.addEventListener('click', (event) => {
+    // console.log(event.target);
+    if (!root.contains(event.target)) {
+        dropdown.classList.remove('is-active');
+    }
+});
 
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
@@ -65,15 +75,31 @@ input.addEventListener('input', onInput);
 //     timeoutId = setTimeout(async () => {
 //         const movies = await fetchData(event.target.value);
 //         // console.log(movies);
+
+//         if (!movies.length) {
+//             dropdown.classList.remove('is-active');
+//         }
+
+//         resultsWrapper.innerHTML = '';
+//         dropdown.classList.add('is-active');
+
 //         for (let movie of movies) {
-//             const div = document.createElement('div');
-//             div.innerHTML = `
-//                 <img src="${movie.Poster}" alt="${movie.Title}" />
-//                 <h1>${movie.Title}</h1>
+//             const option = document.createElement('a');
+//             const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
+//             option.classList.add('dropdown-item');
+//             option.innerHTML = `
+//                 <img src="${imgSrc}" />
+//                 ${movie.Title}
 //             `;
-//             document.querySelector('#target').append(div);
+//             resultsWrapper.append(option);
 //         }
 //     }, 1000);
 // };
 
 // input.addEventListener('input', onInput);
+// document.addEventListener('click', (event) => {
+//     // console.log(event.target);
+//     if (!root.contains(event.target)) {
+//         dropdown.classList.remove('is-active');
+//     }
+// });
