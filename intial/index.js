@@ -46,7 +46,7 @@ const onInput = debounce(async (event) => {
         option.classList.add('dropdown-item');
         option.innerHTML = `
             <img src="${imgSrc}" />
-            ${movie.Title}
+            <span>${movie.Title}</span>
         `;
         option.addEventListener('click', () => {
             dropdown.classList.remove('is-active');
