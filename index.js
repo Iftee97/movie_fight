@@ -51,6 +51,7 @@ const onInput = debounce(async (event) => {
         option.addEventListener('click', () => {
             dropdown.classList.remove('is-active');
             input.value = movie.Title;
+            onMovieSelect(movie);
         });
         resultsWrapper.append(option);
     }
@@ -63,6 +64,19 @@ document.addEventListener('click', (event) => {
         dropdown.classList.remove('is-active');
     }
 });
+
+const onMovieSelect = async (movie) => {
+    // console.log(movie);
+    const response = await axios.get('http://www.omdbapi.com/', {
+        params: {
+            apikey: '57fa5073',
+            i: movie.imdbID
+        }
+    });
+
+    console.log(response.data);
+};
+
 
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
@@ -98,6 +112,7 @@ document.addEventListener('click', (event) => {
 //             option.addEventListener('click', () => {
 //                 dropdown.classList.remove('is-active');
 //                 input.value = movie.Title;
+//                 onMovieSelect(movie);
 //             });
 //             resultsWrapper.append(option);
 //         }
@@ -111,3 +126,15 @@ document.addEventListener('click', (event) => {
 //         dropdown.classList.remove('is-active');
 //     }
 // });
+
+// const onMovieSelect = async (movie) => {
+//     // console.log(movie);
+//     const response = await axios.get('http://www.omdbapi.com/', {
+//         params: {
+//             apikey: '57fa5073',
+//             i: movie.imdbID
+//         }
+//     });
+
+//     console.log(response.data);
+// };
