@@ -22,6 +22,12 @@ createAutoComplete({
             <img src="${imgSrc}" />
             <span>${movie.Title} (${movie.Year})</span>
         `;
+    },
+    onOptionSelect(movie) {
+        onMovieSelect(movie);
+    },
+    inputValue(movie) {
+        return movie.Title;
     }
 });
 

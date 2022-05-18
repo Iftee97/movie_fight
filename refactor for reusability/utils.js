@@ -1,5 +1,5 @@
 // // debouncing an input: waiting for some time to pass after the last event to actually do something
-const debounce = (func, delay = 1000) => {
+const debounce = (func, delay = 750) => {
     let timeoutId;
     return (...args) => {
         if (timeoutId) {
